@@ -1,0 +1,27 @@
+<h1>Upload</h1>
+
+<form action='/upload' method="POST" enctype="multipart/form-data">
+<input type='file' name="avatar" multiple>
+<button>Submit</button> 
+
+<div class="imagesContainer">
+
+</div>
+
+<script>
+    const loadImages=async()=>{
+        const respone = await fetch('http://localhost:4200/images').then(res=>res.json());
+        const imagesContainer=document.querySelector('.imagesContainer');
+        imagesContainer.innerHTML='';
+        respone.data.forEach(image=>{
+            const img =document.createElement('img')
+            img.src=image.filePath;
+            img.height='200';
+            imagesContainer.appendChild(img)
+        })
+
+    }
+
+    window.onload=loadImages;
+</script>
+</form>
